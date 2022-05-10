@@ -6,7 +6,8 @@ import { useParams, useHistory } from 'react-router-dom'
 export const GameUpdate = () => {
     const { gameId } = useParams()
     const history = useHistory()
-
+    const [game, setGame] = useState({})
+    
     const changeGameState = (domEvent) => {
         const copy = { ...game };
         copy[domEvent.target.name] = domEvent.target.value;
@@ -20,15 +21,7 @@ export const GameUpdate = () => {
     }, [])
 
 
-    const [game, setGame] = useState({})
-    updateGame({
-        id: game.id,
-        skill_level: game.skill_level,
-        number_of_players: game.number_of_players,
-        title: game.title,
-        maker: game.maker,
-        game_type: game.game_type
-    })
+
 
     const [gameTypes, setGameTypes] = useState([]);
     useEffect(() => {
@@ -108,7 +101,7 @@ export const GameUpdate = () => {
                         title: game.title,
                         number_of_players: game.number_of_players,
                         skill_level: game.skill_level,
-                        game_type: game.game_type
+                        game_type: game.game_type.id
                     }
 
                     // Send POST request to your API
