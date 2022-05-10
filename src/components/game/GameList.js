@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react"
-import { getGames } from "./GameManager.js"
+import { getGames, deleteGame } from "./GameManager.js"
 import { useHistory } from 'react-router-dom'
+
 
 export const GameList = (props) => {
     const history = useHistory()
-    const [ games, setGames ] = useState([])
+    const [games, setGames] = useState([])
 
     useEffect(() => {
         getGames().then(data => setGames(data))
     }, [])
+
 
     return (
         <article className="games">
@@ -23,11 +25,12 @@ export const GameList = (props) => {
                         <div className="game__title">{game.title} by {game.maker}</div>
                         <div className="game__players">{game.number_of_players} players needed</div>
                         <div className="game__skillLevel">Skill level is {game.skill_level}</div>
-                        <button className="edit-event-btn"
-                                onClick={() => {
+                        <button className="edit-game-btn"
+                            onClick={() => {
                                 history.push({ pathname: `/games/edit/${game.id}` })
                             }}
                         >Edit Game</button>
+                        <button onClick={() => deleteGame(game.id).then(setGames)} >Delete</button>
                     </section>
                 })
             }

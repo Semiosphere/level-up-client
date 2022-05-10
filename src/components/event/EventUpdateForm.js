@@ -6,6 +6,8 @@ import { getGames } from "../game/GameManager"
 export const EventUpdate = () => {
     const { eventId } = useParams()
     const history = useHistory()
+    const [event, setEvent] = useState({})
+
 
     const handleControlledInputChange = (domEvent) => {
         const copy = { ...event };
@@ -19,15 +21,6 @@ export const EventUpdate = () => {
         })
     }, [])
 
-
-    const [event, setEvent] = useState({})
-    updateEvent({
-        id: event.id,
-        game: event.game,
-        description: event.description,
-        date: event.date,
-        time: event.time
-    })
 
 
     const [games, setGames] = useState([]);
